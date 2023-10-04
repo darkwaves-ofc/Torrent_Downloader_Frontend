@@ -13,13 +13,13 @@ function App() {
   return (
     <>
       <Router>
-        <Header />
+        {/* <Header /> */}
         <Routes>
           <Route path="/auth/*" element={<Auth />} />
           <Route path="/main" element={<Main />} />
           {/* Define other routes as needed */}
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </Router>
     </>
   );

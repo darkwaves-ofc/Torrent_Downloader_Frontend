@@ -1,0 +1,67 @@
+export const download = [
+  {
+    id: 1,
+    name: "Torrent One",
+    icon: "Folder",
+    functions: [
+      { name: "Download", icon: "download" },
+      { name: "Delete", icon: "trash" },
+    ],
+    size: "668.15 MB",
+    downloaded: "152 MB",
+    process: "15%",
+    seeder: "15",
+  },
+  {
+    id: 2,
+    name: "Torrent Two",
+    icon: "Folder",
+    functions: [
+      { name: "Download", icon: "download" },
+      { name: "Delete", icon: "trash" },
+    ],
+    size: "512.75 MB",
+    downloaded: "89 MB",
+    process: "20%",
+    seeder: "20",
+  },
+  {
+    id: 3,
+    name: "Torrent Three",
+    icon: "Folder",
+    functions: [
+      { name: "Download", icon: "download" },
+      { name: "Delete", icon: "trash" },
+    ],
+    size: "1024.00 MB",
+    downloaded: "320 MB",
+    process: "31%",
+    seeder: "12",
+  },
+  {
+    id: 4,
+    name: "Torrent Four",
+    icon: "Folder",
+    functions: [
+      { name: "Download", icon: "download" },
+      { name: "Delete", icon: "trash" },
+    ],
+    size: "256.50 MB",
+    downloaded: "42 MB",
+    process: "16%",
+    seeder: "8",
+  },
+  {
+    id: 5,
+    name: "Torrent Five",
+    icon: "Folder",
+    functions: [
+      { name: "Download", icon: "download" },
+      { name: "Delete", icon: "trash" },
+    ],
+    size: "819.20 MB",
+    downloaded: "123 MB",
+    process: "15%",
+    seeder: "10",
+  },
+];
