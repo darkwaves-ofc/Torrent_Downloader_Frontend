@@ -1,0 +1,124 @@
+.auth__page {
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.auth__page .container {
+  background-color: #fff;
+  border-radius: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+  position: relative;
+  overflow: hidden;
+  width: clamp(32%, 45vw, 79%); /* Using clamp for width */
+  min-height: 480px;
+}
+
+@media (max-width: 768px) {
+  .auth__page .container {
+    width: clamp(80%, 80vw, 50%);
+  }
+}
+
+.auth__page .container p {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.3px;
+  margin: 20px 0;
+}
+
+.auth__page .container span {
+  font-size: 12px;
+}
+
+.auth__page .container a {
+  color: #333;
+  font-size: 13px;
+  text-decoration: none;
+  margin: 15px 0 10px;
+}
+
+.auth__page .container button {
+  background-color: #512da8;
+  color: #fff;
+  font-size: 12px;
+  padding: 10px 45px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.auth__page .container button.hidden {
+  background-color: transparent;
+  border-color: #fff;
+}
+
+.auth__page .container form {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 40px;
+  height: 100%;
+  gap: 1rem;
+  overflow: hidden;
+}
+
+.auth__page .container input {
+  background-color: #eee;
+  border: none;
+  margin: 8px 0;
+  padding: 10px 15px;
+  font-size: 13px;
+  border-radius: 8px;
+  outline: none;
+}
+
+.auth__page .form-container {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+}
+
+.auth__page .sign-in {
+  left: 0;
+  z-index: 2;
+}
+
+.auth__page .container.active .sign-in {
+  transform: translateX(100%);
+}
+
+.auth__page .sign-up {
+  left: 0;
+  opacity: 0;
+  z-index: 1;
+}
+
+.auth__page .container.active .sign-up {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  animation: move 0.6s;
+}
+
+@keyframes move {
+  0%,
+  49.99% {
+    opacity: 0;
+    z-index: 1;
+  }
+  50%,
+  100% {
+    opacity: 1;
+    z-index: 5;
+  }
+}
