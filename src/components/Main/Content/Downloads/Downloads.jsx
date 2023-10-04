@@ -1,23 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { download } from "../../../../data/data";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./Downloads.css";
+import { io } from "socket.io-client";
+import axios from "axios";
+import Card from "./Card/Card";
 
 export default function Downloads() {
+  const [Downloads, setDownloads] = useState([]);
+
+  useEffect(() => {
+    axios.post("/download/all").then((Response) => {
+      console.log(Response.data);
+      setDownloads(Response.data);
+    });
+  }, []);
   return (
-    <div className="flex-col border m-1 p-2">
-      {download.map((data) => (
-        <div key={data.id} className="content flex-row-bet m-3">
-          <div className="icon">{data.icon}</div>
-          <div className="name ">{data.name}</div>
-          <div className="functions flex-row g-3">
-            {data.functions.map((datafunction) => (
-              <FontAwesomeIcon icon={`fa-solid fa-${datafunction.icon}`} />
-            ))}
-          </div>
-          <div className="process">{data.process}</div>
-          <div className="size">
-            {data.size}/{data.downloaded}
-          </div>
+    <div className="content__download flex-col border m-2 p-5 h-full">
+      {Downloads.map((data) => (
+        <div key={data.torrentId} className="content flex-row-bet m-1 p-3">
+          <Card contentData={data} />
         </div>
       ))}
     </div>

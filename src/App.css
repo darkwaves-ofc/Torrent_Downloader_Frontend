@@ -1,7 +1,6 @@
 * {
   margin: 0;
   padding: 0;
-  overflow-y: hidden;
 }
 
 a {
@@ -423,14 +422,30 @@ body.dark {
 }
 
 /* Gap Utilities */
-.g-1 { gap: var(--space-1); }
-.g-2 { gap: var(--space-2); }
-.g-3 { gap: var(--space-3); }
-.g-4 { gap: var(--space-4); }
-.g-5 { gap: var(--space-5); }
-.g-6 { gap: var(--space-6); }
-.g-7 { gap: var(--space-7); }
-.g-8 { gap: var(--space-8); }
+.g-1 {
+  gap: var(--space-1);
+}
+.g-2 {
+  gap: var(--space-2);
+}
+.g-3 {
+  gap: var(--space-3);
+}
+.g-4 {
+  gap: var(--space-4);
+}
+.g-5 {
+  gap: var(--space-5);
+}
+.g-6 {
+  gap: var(--space-6);
+}
+.g-7 {
+  gap: var(--space-7);
+}
+.g-8 {
+  gap: var(--space-8);
+}
 
 /* Color Utilities */
 .bg-primary {
@@ -870,9 +885,11 @@ body.dark {
 .h-95 {
   height: 95%;
 }
-.h-100,
-.h-full {
+.h-100 {
   height: 100%;
+}
+.h-full {
+  min-height: 100vh;
 }
 
 /* Others */

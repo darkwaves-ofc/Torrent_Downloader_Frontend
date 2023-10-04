@@ -1,0 +1,11 @@
+.content__download .process {
+  overflow: hidden;
+}
+.content__download .progress_bar {
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.content__download .process span {
+    z-index: 2;
+}

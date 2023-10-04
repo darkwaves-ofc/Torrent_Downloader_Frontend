@@ -8,18 +8,19 @@ import "./utils/fontAwesomeSetup.js";
 import "./utils/FontLoader";
 import Header from "./common/Header/Header";
 import Footer from "./common/Footer/Footer";
+import { DataProvider } from "./context/DataContext";
 
 function App() {
   return (
     <>
       <Router>
-        {/* <Header /> */}
-        <Routes>
-          <Route path="/auth/*" element={<Auth />} />
-          <Route path="/main" element={<Main />} />
-          {/* Define other routes as needed */}
-        </Routes>
-        {/* <Footer /> */}
+        <DataProvider>
+          <Routes>
+            <Route path="/auth/*" element={<Auth />} />
+            <Route path="/main" element={<Main />} />
+            {/* Define other routes as needed */}
+          </Routes>
+        </DataProvider>
       </Router>
     </>
   );
