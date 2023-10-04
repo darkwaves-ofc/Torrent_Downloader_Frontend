@@ -10,11 +10,11 @@ export default function ({ mode }) {
     plugins: [react()],
 
     server: {
-      port: 3050,
-      host: false,
+      port: 9050,
+      host: true,
       proxy: {
         "/api": {
-          target: env.VITE_APIURI,
+          target: "http://localhost:9080/",
         },
       },
     },

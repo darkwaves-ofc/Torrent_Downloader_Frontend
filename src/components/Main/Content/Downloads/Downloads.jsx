@@ -5,12 +5,13 @@ import "./Downloads.css";
 import { io } from "socket.io-client";
 import axios from "axios";
 import Card from "./Card/Card";
+import { serverData } from "../../../../../config";
 
 export default function Downloads() {
   const [Downloads, setDownloads] = useState([]);
 
   useEffect(() => {
-    axios.post("/download/all").then((Response) => {
+    axios.post(`${serverData.API}/download/all`).then((Response) => {
       console.log(Response.data);
       setDownloads(Response.data);
     });

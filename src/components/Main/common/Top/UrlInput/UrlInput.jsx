@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { serverData } from "../../../../../../config";
 
 export default function UrlInput() {
   const [magnetUri, setMagnetUri] = useState(""); // Fixed variable name and initial state value
@@ -14,7 +15,7 @@ export default function UrlInput() {
 
     // Make the POST request with the Magnet URI
     axios
-      .post("/download/start", { magnetLink: magnetUri }) // Send the Magnet URI as an object
+      .post(`${serverData.API}/download/start`, { magnetLink: magnetUri }) // Send the Magnet URI as an object
       .then((response) => {
         console.log("POST request successful:", response.data);
         // Handle the response data here

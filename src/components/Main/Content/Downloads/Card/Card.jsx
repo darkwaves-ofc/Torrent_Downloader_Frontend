@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
+import { serverData } from "../../../../../../config";
 
 export default function Card({ contentData }) {
   console.log(contentData);
@@ -8,7 +9,7 @@ export default function Card({ contentData }) {
   const [downloadData, setdownloadData] = useState(null);
   useEffect(() => {
     // Connect to the WebSocket server
-    const socket = io.connect("/socket.io");
+    const socket = io.connect(`${serverData.API}/socket.io`);
 
     socket.on("connect", () => {
       console.log("Connected to WebSocket server");
