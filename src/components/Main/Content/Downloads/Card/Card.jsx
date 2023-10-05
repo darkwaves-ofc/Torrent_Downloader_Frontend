@@ -59,7 +59,7 @@ export default function Card({ contentData }) {
               />
             </span>
           ) : (
-            <a href={`${serverData.API}/download/${api}`}>
+            <a href={`${serverData.API}/download/${datafunction.api}`}>
               <FontAwesomeIcon
                 key={datafunction.icon}
                 icon={`fa-solid fa-${datafunction.icon}`}
