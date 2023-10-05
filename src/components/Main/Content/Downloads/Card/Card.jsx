@@ -8,7 +8,7 @@ export default function Card({ contentData }) {
   console.log(contentData);
   const [torrentInfo, setTorrentInfo] = useState(null);
   const [downloadData, setDownloadData] = useState(null);
-  
+
   useEffect(() => {
     // Connect to the WebSocket server
     const socket = io.connect(`${serverData.API}`);
@@ -33,9 +33,10 @@ export default function Card({ contentData }) {
       socket.disconnect();
     };
   }, []);
-  
-  const runApi = (api) => { // Fix the function definition and parameter
-    axios.post(`${serverData.API}/download${api}`).then((Response) => {
+
+  const runApi = (api, method) => {
+    // Fix the function definition and parameter
+    axios[method](`${serverData.API}/download${api}`).then((Response) => {
       console.log(Response.data);
     });
   };
@@ -52,7 +53,11 @@ export default function Card({ contentData }) {
         {contentData.functions.map(
           (datafunction) =>
             datafunction && (
-              <span onClick={() => runApi(datafunction.api)}> {/* Correct onClick usage */}
+              <span
+                onClick={() => runApi(datafunction.api, datafunction.method)}
+              >
+                {" "}
+                {/* Correct onClick usage */}
                 <FontAwesomeIcon
                   key={datafunction.icon}
                   icon={`fa-solid fa-${datafunction.icon}`}
