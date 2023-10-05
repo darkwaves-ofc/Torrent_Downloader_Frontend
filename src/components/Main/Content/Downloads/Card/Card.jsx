@@ -36,7 +36,7 @@ export default function Card({ contentData }) {
 
   const runApi = (api, method) => {
     // Fix the function definition and parameter
-    axios[method](`${serverData.API}/download${api}`).then((Response) => {
+    axios.post(`${serverData.API}/download${api}`).then((Response) => {
       console.log(Response.data);
     });
   };
