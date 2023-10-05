@@ -34,16 +34,11 @@ export default function Card({ contentData }) {
     };
   }, []);
 
-  const runApi = (api, method) => {
+  const runApi = (api) => {
     // Fix the function definition and parameter
-    if (method === "GET") {
-      window.location.reload(`${serverData.API}/download/${api}`);
-    }
-    if (method === "POST") {
-      axios.post(`${serverData.API}/download/${api}`).then((Response) => {
-        console.log(Response.data);
-      });
-    }
+    axios.post(`${serverData.API}/download/${api}`).then((Response) => {
+      console.log(Response.data);
+    });
   };
 
   return (
@@ -55,20 +50,22 @@ export default function Card({ contentData }) {
         <div className="name ">{contentData.name}</div>
       </div>
       <div className="functions flex-row g-3">
-        {contentData.functions.map(
-          (datafunction) =>
-            datafunction && (
-              <span
-                onClick={() => runApi(datafunction.api, datafunction.method)}
-              >
-                {" "}
-                {/* Correct onClick usage */}
-                <FontAwesomeIcon
-                  key={datafunction.icon}
-                  icon={`fa-solid fa-${datafunction.icon}`}
-                />
-              </span>
-            )
+        {contentData.functions.map((datafunction) =>
+          datafunction.method === "POST" ? (
+            <span onClick={() => runApi(datafunction.api)}>
+              <FontAwesomeIcon
+                key={datafunction.icon}
+                icon={`fa-solid fa-${datafunction.icon}`}
+              />
+            </span>
+          ) : (
+            <a href={`${serverData.API}/download/${api}`}>
+              <FontAwesomeIcon
+                key={datafunction.icon}
+                icon={`fa-solid fa-${datafunction.icon}`}
+              />
+            </a>
+          )
         )}
       </div>
       {downloadData && (
