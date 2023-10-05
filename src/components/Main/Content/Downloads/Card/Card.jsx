@@ -2,34 +2,27 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { serverData } from "../../../../../../config";
+import axios from "axios"; // Don't forget to import axios
 
 export default function Card({ contentData }) {
   console.log(contentData);
-  const [torrentInfo, settorrentInfo] = useState(null);
-  const [downloadData, setdownloadData] = useState(null);
+  const [torrentInfo, setTorrentInfo] = useState(null);
+  const [downloadData, setDownloadData] = useState(null);
+  
   useEffect(() => {
     // Connect to the WebSocket server
-    const socket = io.connect(`${serverData.API}/socket.io`);
+    const socket = io.connect(`${serverData.API}`);
 
     socket.on("connect", () => {
       console.log("Connected to WebSocket server");
-    });
-
-    socket.on(`torrentInfo-${contentData.torrentId}`, (torrentInfo) => {
-      console.log("Received torrent info:", torrentInfo);
-      settorrentInfo(torrentInfo);
-      // Handle torrent info here
-      // You can update your component state with the received data
     });
 
     socket.on(`downloadData-${contentData.torrentId}`, (downloadData) => {
       console.log("Received download data:", downloadData);
       // Handle download data updates here
       // You can update your component state with the received data
-      setdownloadData(downloadData);
+      setDownloadData(downloadData);
     });
-
-    socket.on(`downlaoded-${contentData.torrentId}, (downlaoded)`);
 
     socket.on("disconnect", () => {
       console.log("Disconnected from WebSocket server");
@@ -40,6 +33,12 @@ export default function Card({ contentData }) {
       socket.disconnect();
     };
   }, []);
+  
+  const runApi = (api) => { // Fix the function definition and parameter
+    axios.post(`${serverData.API}/download${api}`).then((Response) => {
+      console.log(Response.data);
+    });
+  };
 
   return (
     <div className="w-full flex-row-bet">
@@ -50,16 +49,19 @@ export default function Card({ contentData }) {
         <div className="name ">{contentData.name}</div>
       </div>
       <div className="functions flex-row g-3">
-        {contentData.functions.map((datafunction) => (
-          <a href={datafunction.api}>
-            <FontAwesomeIcon
-              key={datafunction.icon}
-              icon={`fa-solid fa-${datafunction.icon}`}
-            />
-          </a>
-        ))}
+        {contentData.functions.map(
+          (datafunction) =>
+            datafunction && (
+              <span onClick={() => runApi(datafunction.api)}> {/* Correct onClick usage */}
+                <FontAwesomeIcon
+                  key={datafunction.icon}
+                  icon={`fa-solid fa-${datafunction.icon}`}
+                />
+              </span>
+            )
+        )}
       </div>
-      {downloadData && ( // Conditionally render progress-related elements when downloadData is available
+      {downloadData && (
         <div className="process w-30 p-1 position-relative flex-row-center bg-light rounded-sm border">
           <span>
             {downloadData.downloadSpeed} - {downloadData.progress}
@@ -71,7 +73,7 @@ export default function Card({ contentData }) {
         </div>
       )}
       <div className="size">
-        {downloadData && ( // Conditionally render size-related elements when both torrentInfo and downloadData are available
+        {downloadData && (
           <>
             {downloadData.totalSize}/{downloadData.received} ||{" "}
             {downloadData.timeRemaining}
