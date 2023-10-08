@@ -12,8 +12,11 @@ export default function Card({ contentData }) {
           <FontAwesomeIcon icon={`fa-solid fa-file`} />
         </div>
         <div className="name">
-          {(contentData.torrentName && contentData.torrentName) ||
-            (contentData.torrentInfo.name && contentData.torrentInfo.name)}
+          {contentData.torrentName
+            ? contentData.torrentName
+            : contentData.torrentInfo.name
+            ? contentData.torrentInfo.name
+            : "-"}
         </div>
       </div>
 
