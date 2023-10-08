@@ -14,7 +14,7 @@ export default function Card({ contentData }) {
         <div className="name">
           {contentData.torrentName
             ? contentData.torrentName
-            : contentData.torrentInfo.name
+            : contentData.torrentInfo
             ? contentData.torrentInfo.name
             : "-"}
         </div>
