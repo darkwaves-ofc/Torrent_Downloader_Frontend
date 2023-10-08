@@ -19,20 +19,26 @@ export default function Card({ contentData }) {
             : "-"}
         </div>
       </div>
-
-      {contentData.downloadData && (
+      {/* contentData.state === "Downloading" */}
+      {
         <div className="process w-30 p-1 position-relative flex-row-center bg-light rounded-sm border">
           <span>
-            {contentData.downloadData.downloadSpeed} - {contentData.state}
+            {contentData.downloadData &&
+              contentData.downloadData.downloadSpeed + " - "}
+            {contentData.state}
           </span>
           <div
             className="progress_bar position-absolute h-100 bg-primary"
             style={{
-              width: contentData.downloadData.progress,
+              width: contentData.downloadData
+                ? contentData.downloadData.progress
+                : contentData.state === "Done!"
+                ? "100%"
+                : "0%",
             }}
           ></div>
         </div>
-      )}
+      }
 
       <div className="size">
         {contentData.downloadData && (
