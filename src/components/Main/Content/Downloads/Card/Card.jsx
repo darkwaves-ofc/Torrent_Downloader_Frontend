@@ -32,9 +32,11 @@ export default function Card({ contentData }) {
             style={{
               width: contentData.downloadData
                 ? contentData.downloadData.progress
+                : contentData.state === "Achiving" && contentData.achiveState
+                ? contentData.achiveState
                 : contentData.state === "Done!"
                 ? "100%"
-                : "0%",
+                : "",
             }}
           ></div>
         </div>
