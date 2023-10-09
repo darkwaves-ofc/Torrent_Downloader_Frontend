@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 import axios from "axios";
 import Card from "./Card/Card";
 import { serverData } from "../../../../../config";
-import "./Downloads.css"
+import "./Downloads.css";
 
 export default function Downloads() {
   const [apiDownloads, setApiDownloads] = useState([]);
@@ -15,7 +15,9 @@ export default function Downloads() {
     const mergedData = [...apiData];
 
     for (const socketItem of socketData) {
-      const existingIndex = mergedData.findIndex((apiItem) => apiItem.torrentId === socketItem.torrentId);
+      const existingIndex = mergedData.findIndex(
+        (apiItem) => apiItem.torrentId === socketItem.torrentId
+      );
 
       if (existingIndex !== -1) {
         // Replace the API data with WebSocket data when there is a conflict
@@ -40,7 +42,7 @@ export default function Downloads() {
 
       setFinalDownloads([...updatedFinalDownloads]); // Clone the array to trigger a state update
     });
-  }, [socketDownloads]);
+  }, []);
 
   useEffect(() => {
     const socket = io.connect(`${serverData.API}`);
@@ -51,7 +53,10 @@ export default function Downloads() {
       setSocketDownloads((prevSocketDownloads) => {
         // Filter out any items with matching torrentId from API data
         const filteredApiDownloads = prevSocketDownloads.filter(
-          (item) => !webSocketData.some((socketItem) => socketItem.torrentId === item.torrentId)
+          (item) =>
+            !webSocketData.some(
+              (socketItem) => socketItem.torrentId === item.torrentId
+            )
         );
         return [...filteredApiDownloads, ...webSocketData];
       });
