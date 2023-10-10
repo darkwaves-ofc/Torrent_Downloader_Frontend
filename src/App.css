@@ -519,6 +519,9 @@ body.dark {
 .border-l {
   border-left: var(--border);
 }
+.border-none {
+  border: none;
+}
 .rounded {
   border-radius: var(--border-radius-sm);
 }

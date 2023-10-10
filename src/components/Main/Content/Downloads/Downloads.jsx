@@ -6,7 +6,6 @@ import { serverData } from "../../../../../config";
 import "./Downloads.css"
 
 export default function Downloads() {
-  const [apiDownloads, setApiDownloads] = useState([]);
   const [socketDownloads, setSocketDownloads] = useState([]);
   const [finalDownloads, setFinalDownloads] = useState([]);
 

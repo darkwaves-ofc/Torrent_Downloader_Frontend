@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { serverData } from "../../../../../../config";
+import "./UrlInput.css";
 
 export default function UrlInput() {
   const [magnetUri, setMagnetUri] = useState(""); // Fixed variable name and initial state value
@@ -27,17 +28,20 @@ export default function UrlInput() {
   };
 
   return (
-    <div className="w-40">
+    <div className="url-input w-40 flex-row rounded">
       <input
         type="text"
-        className="w-100 border p-2"
+        className="w-100 rounded-left p-2"
         name="urlinput"
         id="urlinput"
         placeholder="Enter Your Magnet URI"
         value={magnetUri} // Bind the input value to the state
         onChange={handleChange}
       />
-      <button className="bg-primary" onClick={handleSubmit}>
+      <button
+        className="submit-btn bg-info rounded p-2"
+        onClick={handleSubmit}
+      >
         Submit
       </button>
     </div>
