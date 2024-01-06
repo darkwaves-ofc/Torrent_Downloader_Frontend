@@ -1,4 +1,8 @@
+
+const ip = "localhost";
+const port = 8080;
+
 export const serverData = {
-  API: "http://199.127.63.2:9080",
-  WS: "ws://199.127.63.2:9080",
+  API: `http://${ip}:${port}/api/v1`,
+  WS: `ws://${ip}:${port}`,
 };

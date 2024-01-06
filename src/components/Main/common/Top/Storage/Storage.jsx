@@ -5,23 +5,25 @@ import { serverData } from "../../../../../../config";
 
 export default function Storage() {
   const [storageStats, setStorageStats] = useState({});
-console.log(storageStats)
-  useEffect(() => {
-    const socket = socketIOClient(serverData.API);
+// console.log(storageStats)
+//   useEffect(() => {
+//     const socket = socketIOClient(serverData.WS,"/v1/public");
 
-    socket.on("system-specs", (data) => {
-      setStorageStats(data[0]);
-    });
+//     socket.on("server-message", (data) => {
+//       if (data.type === "usage"){
+//         console.log(data)
+//       }
+//     });
 
-    // Clean up the socket connection when the component unmounts
-    return () => socket.disconnect();
-  }, []);
+//     // Clean up the socket connection when the component unmounts
+//     return () => socket.disconnect();
+//   }, []);
 
-  const { storage } = storageStats;
+  // const { storage } = storageStats;
   return (
     <div className="server-stats w-20">
       <div className="title font-weight-600 text-center">Your Storage</div>
-      <div className="progress h-100 border bg-light position-relative rounded bg-info">
+      {/* <div className="progress h-100 border bg-light position-relative rounded bg-info">
         <div
           className="progress-bar bg-secondary absolute"
           style={{ width: storage?.percentage }}
@@ -29,7 +31,7 @@ console.log(storageStats)
       </div>
       <span className="status font-weight-300 font-sm w-100 text-left flex-end">
         {`${storage?.usedStorage}gb/${storage?.totalStorage}gb`}
-      </span>
+      </span> */}
     </div>
   );
 }

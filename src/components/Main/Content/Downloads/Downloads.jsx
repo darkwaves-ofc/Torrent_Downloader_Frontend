@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 import axios from "axios";
 import Card from "./Card/Card";
 import { serverData } from "../../../../../config";
-import "./Downloads.css"
+import "./Downloads.css";
 
 export default function Downloads() {
   const [socketDownloads, setSocketDownloads] = useState([]);
@@ -14,7 +14,9 @@ export default function Downloads() {
     const mergedData = [...apiData];
 
     for (const socketItem of socketData) {
-      const existingIndex = mergedData.findIndex((apiItem) => apiItem.torrentId === socketItem.torrentId);
+      const existingIndex = mergedData.findIndex(
+        (apiItem) => apiItem.torrentId === socketItem.torrentId
+      );
 
       if (existingIndex !== -1) {
         // Replace the API data with WebSocket data when there is a conflict
@@ -30,7 +32,7 @@ export default function Downloads() {
 
   useEffect(() => {
     // Fetch API data on component mount
-    axios.post(`${serverData.API}/download`).then((response) => {
+    axios.get(`${serverData.API}/torrents`).then((response) => {
       const apiData = response.data;
       // console.log("API Data", apiData);
 
@@ -42,18 +44,17 @@ export default function Downloads() {
   }, [socketDownloads]);
 
   useEffect(() => {
-    const socket = io.connect(`${serverData.API}`);
+    const socket = io.connect(`${serverData.WS}/v1/public`);
 
     // Listen for WebSocket data
     socket.on("server-message", (webSocketData) => {
       // console.log("WebSocket Data", webSocketData);
-      setSocketDownloads((prevSocketDownloads) => {
-        // Filter out any items with matching torrentId from API data
-        const filteredApiDownloads = prevSocketDownloads.filter(
-          (item) => !webSocketData.some((socketItem) => socketItem.torrentId === item.torrentId)
-        );
-        return [...filteredApiDownloads, ...webSocketData];
-      });
+      if (webSocketData.type === "torrentUpdate") {
+        setSocketDownloads((prevSocketDownloads) => {
+          // Filter out any items with matching torrentId from API data
+          return [...prevSocketDownloads, webSocketData.payload];
+        });
+      }
     });
 
     // Clean up WebSocket connection on unmount

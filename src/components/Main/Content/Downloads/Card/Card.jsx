@@ -54,7 +54,7 @@ export default function Card({ contentData }) {
 
       {contentData.state === "Done!" && (
         <a
-          href={`${serverData.API}/download/${contentData.downloadPath}`}
+          href={`${serverData.API}/torrent/${contentData.torrentId}`}
           className="link"
         >
           Download

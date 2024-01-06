@@ -16,7 +16,7 @@ export default function UrlInput() {
 
     // Make the POST request with the Magnet URI
     axios
-      .post(`${serverData.API}/download/start`, { magnetLink: magnetUri }) // Send the Magnet URI as an object
+      .put(`${serverData.API}/torrent`, { magnetLink: magnetUri }) // Send the Magnet URI as an object
       .then((response) => {
         console.log("POST request successful:", response.data);
         // Handle the response data here
