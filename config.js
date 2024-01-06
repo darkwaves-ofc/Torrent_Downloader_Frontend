@@ -1,5 +1,5 @@
 
-const ip = "localhost";
+const ip = "199.127.63.2";
 const port = 8080;
 
 export const serverData = {
